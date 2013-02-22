@@ -180,6 +180,7 @@
                 if (options.added) options.added(row);
                 return false;
             });
+            checkActionButtons();
         }
 
         return $$;
