@@ -50,10 +50,10 @@
                     // last child element of the form's container:
                     row.append('<a class="' + options.deleteCssClass + '" href="javascript:void(0)">' + options.deleteText +'</a>');
                 }
-                row.find('a.' + options.deleteCssClass).click(function() {
+                row.find('a.' + options.deleteCssClass.replace(/\s+/g, '.').click(function() {
                     var row = $(this).parents('.' + options.formCssClass),
                         del = row.find('input:hidden[id $= "-DELETE"]');
-                    if (options.beforeremove) options.beforeremove(row)
+                    if (options.beforeremove) options.beforeremove(row);
                     if (del.length) {
                         // We're dealing with an inline formset; rather than remove
                         // this form from the DOM, we'll mark it as deleted and hide
@@ -77,11 +77,11 @@
                     // If a post-delete callback was provided, call it with the deleted form:
                     if (options.removed) options.removed(row);
                     return false;
-                });
+                }));
             },
             checkActionButtons = function() {
                 var max_num = parseInt($('#id_' + options.prefix + '-MAX_NUM_FORMS').val()),
-                    formCount = $$formsetContainer.find('.'+options.formCssClass).length
+                    formCount = $$formsetContainer.find('.'+options.formCssClass).length;
 
                 if (options.min_num > 0) {
                     if (formCount <= options.min_num) {
@@ -146,7 +146,7 @@
             // FIXME: Perhaps using $.data would be a better idea?
             options.formTemplate = template;
 
-            if ($$.attr('tagName') == 'TR') {
+            if ($$.prop('tagName') == 'TR') {
                 // If forms are laid out as table rows, insert the
                 // "add" button in a new table row:
                 var numCols = $$.eq(0).children().length;
@@ -184,7 +184,7 @@
         }
 
         return $$;
-    }
+    };
 
     /* Setup plugin defaults */
     $.fn.formset.defaults = {
@@ -202,4 +202,4 @@
         beforeremove: null,              // Function called each time before a new form is added
         removed: null                    // Function called each time a form is deleted
     };
-})(jQuery)
+})(jQuery);
