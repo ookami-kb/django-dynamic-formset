@@ -50,7 +50,7 @@
                     // last child element of the form's container:
                     row.append('<a class="' + options.deleteCssClass + '" href="javascript:void(0)">' + options.deleteText +'</a>');
                 }
-                row.find('a.' + options.deleteCssClass.replace(/\s+/g, '.').click(function() {
+                row.find('a.' + options.deleteCssClass.replace(/\s+/g, '.')).click(function() {
                     var row = $(this).parents('.' + options.formCssClass),
                         del = row.find('input:hidden[id $= "-DELETE"]');
                     if (options.beforeremove) options.beforeremove(row);
@@ -77,7 +77,7 @@
                     // If a post-delete callback was provided, call it with the deleted form:
                     if (options.removed) options.removed(row);
                     return false;
-                }));
+                });
             },
             checkActionButtons = function() {
                 var max_num = parseInt($('#id_' + options.prefix + '-MAX_NUM_FORMS').val()),
